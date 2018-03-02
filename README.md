@@ -1,4 +1,4 @@
-# Disco
+# Disqo
 
 ![disco ball](disco.gif)
 
