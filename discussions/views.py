@@ -49,3 +49,13 @@ def create(request):
     topic.save()
     logger.info('Saving new topic: {}'.format(topic))
     return redirect('/discussions/{}'.format(topic.id))
+
+
+def comment(request, topic_id):
+    comment = Comment(topic_id=topic_id,
+                      comment_text=request.POST['comment_text'],
+                      pub_date=timezone.now())
+    comment.save()
+    logger.info('New comment: {}, Topic ID: {}'
+                .format(comment, topic_id))
+    return redirect('/discussions/{}'.format(topic_id))

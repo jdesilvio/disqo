@@ -12,6 +12,10 @@
     <p>There are no comments for this topic.</p>
 {% endif %}
 
-<textarea maxlength="{{ max_comment_length }}"></textarea>
-
-<button>Add a comment</button>
+<form action="{% url 'discussions:comment' topic.id %}" method="post">
+    {% csrf_token %}
+    <label for="title">Comment</label><br />
+    <input type="textbox" maxlength="{{ max_comment_length }}" name="comment_text"/>
+    <br /><br \>
+    <input type="submit" value="Submit Comment"/>
+</form>
