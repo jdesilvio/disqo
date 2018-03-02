@@ -1,0 +1,21 @@
+<h1>{{ topic.title }}</h1>
+
+<p class="topic-description">{{ topic.description }}<p>
+
+{% if comments %}
+    <ul>
+    {% for comment in comments %}
+        <li>{{ comment.comment_text }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>There are no comments for this topic.</p>
+{% endif %}
+
+<form action="{% url 'discussions:comment' topic.id %}" method="post">
+    {% csrf_token %}
+    <label for="title">Comment</label><br />
+    <input type="textbox" maxlength="{{ max_comment_length }}" name="comment_text"/>
+    <br /><br \>
+    <input type="submit" value="Submit Comment"/>
+</form>

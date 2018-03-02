@@ -1,0 +1,12 @@
+<h1>Create a new topic</h1>
+
+<form action="{% url 'discussions:create' %}" method="post">
+    {% csrf_token %}
+    <label for="title">Title</label><br />
+    <input type="textbox" maxlength="{{ max_title_length }}" name="title"/>
+    <br /><br \>
+    <label for="description">Description</label><br />
+    <input type="textarea" maxlength="{{ max_desc_length }}" name="description"/>
+    <br /><br \>
+    <input type="submit" value="Submit Topic"/>
+</form>
