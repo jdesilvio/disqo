@@ -1,12 +1,18 @@
+import logging
 from django.shortcuts import (
     get_object_or_404,
     get_list_or_404,
-    render)
+    render,
+    redirect)
+from django.utils import timezone
 from .models import Topic, Comment
 from .models import (
     MAX_TITLE_LENGTH,
     MAX_DESCRIPTION_LENGTH,
     MAX_COMMENT_LENGTH)
+
+
+logger = logging.getLogger(__name__)
 
 
 def index(request):
@@ -26,3 +32,20 @@ def detail(request, topic_id):
         'max_comment_length': MAX_COMMENT_LENGTH
     }
     return render(request, 'discussions/detail.html', context)
+
+
+def new(request):
+    context = {
+        'max_title_length': MAX_TITLE_LENGTH,
+        'max_desc_length': MAX_DESCRIPTION_LENGTH
+    }
+    return render(request, 'discussions/new.html', context)
+
+
+def create(request):
+    topic = Topic(title=request.POST['title'],
+                  description=request.POST['description'],
+                  pub_date=timezone.now())
+    topic.save()
+    logger.info('Saving new topic: {}'.format(topic))
+    return redirect('/discussions/{}'.format(topic.id))
