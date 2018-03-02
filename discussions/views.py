@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 def index(request):
-    latest_topics = Topic.objects.order_by('-pub_date')[:5]
+    latest_topics = Topic.objects.order_by('-pub_date')
     context = {
         'latest_topics': latest_topics
     }
