@@ -1,0 +1,11 @@
+<button><a href="dicussions/new">Create a new topic</a></button>
+
+{% if latest_topics %}
+    <ul>
+    {% for topic in latest_topics %}
+        <li><a href="/discussions/{{ topic.id }}/">{{ topic.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No discussions are available.</p>
+    {% endif %}
