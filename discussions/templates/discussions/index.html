@@ -1,11 +1,27 @@
-<button><a href="/discussions/new">Create a new topic</a></button>
+{% extends 'discussions/base.html' %}
 
-{% if latest_topics %}
-    <ul>
-    {% for topic in latest_topics %}
-        <li><a href="/discussions/{{ topic.id }}/">{{ topic.title }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No discussions are available.</p>
+{% block content %}
+    <h2>Latest Topics</h2>
+
+    {% if latest_topics %}
+        <ul class="list-group">
+        {% for topic in latest_topics %}
+            <li class="list-group-item">
+                <a href="/discussions/{{ topic.id }}/">{{ topic.title }}</a>
+                <span class="badge badge-info">
+                    Posted: {{ topic.pub_date }}
+                </span>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No discussions are available.</p>
     {% endif %}
+
+    <br \>
+
+    <a href="/discussions/new" class="btn btn-primary" role="button">
+        Create a new topic
+    </a>
+
+{% endblock %}
